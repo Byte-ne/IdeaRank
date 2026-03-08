@@ -5,17 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analysis Dashboard | IdeaRank</title>
+    <!-- App page — excluded from search indexing -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
+    <button id="mobileMenuBtn" class="mobile-menu-btn">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
     <div class="dashboard-container">
         <aside class="sidebar">
             <a href="/" class="sidebar-header">
@@ -29,7 +42,10 @@
                 <a href="#" class="nav-item" data-tool="improver">
                     <span class="material-symbols-outlined">rocket_launch</span> Idea Improver
                 </a>
-                <a href="#" class="nav-item" data-tool="problem" style="opacity: 0.5; cursor: not-allowed;">
+                <a href="#" class="nav-item" data-tool="history">
+                    <span class="material-symbols-outlined">history</span> History
+                </a>
+                <a href="#" class="nav-item" data-tool="problem">
                     <span class="material-symbols-outlined">help</span> Problem Ranker
                 </a>
                 <div style="margin-top: auto;">

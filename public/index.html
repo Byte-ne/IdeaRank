@@ -4,53 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IdeaRank | Expert Idea Analysis</title>
+
+    <!-- Primary SEO -->
+    <title>IdeaRank — Expert AI Startup Idea Analysis & Rankings</title>
+    <meta name="description" content="Get expert-level, transparent AI analysis of your startup ideas. IdeaRank scores, ranks, and improves startup concepts using real market data, SWOT analysis, competitive landscapes, and critical logic.">
+    <meta name="keywords" content="startup idea analysis, startup ranking, AI startup tool, business idea validator, market analysis, SWOT analysis, startup ideas, idea scoring, TAM SAM SOM, competitive analysis">
+    <meta name="author" content="IdeaRank">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="canonical" href="https://idearank.app/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://idearank.app/">
+    <meta property="og:site_name" content="IdeaRank">
+    <meta property="og:title" content="IdeaRank — Expert AI Startup Idea Analysis & Rankings">
+    <meta property="og:description" content="Get expert-level, transparent AI analysis of your startup ideas. Real market data, SWOT analysis, competitive landscapes, and actionable improvement suggestions.">
+    <meta property="og:image" content="https://idearank.app/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://idearank.app/">
+    <meta name="twitter:title" content="IdeaRank — Expert AI Startup Idea Analysis">
+    <meta name="twitter:description" content="Score, rank, and improve your startup ideas with AI-powered market analysis, SWOT, and competitive intelligence.">
+    <meta name="twitter:image" content="https://idearank.app/logo.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "IdeaRank",
+      "url": "https://idearank.app",
+      "description": "Expert-level AI analysis of startup ideas using deep market data, SWOT analysis, competitive mapping, and critical logic scoring.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": ["en", "es", "fr", "de", "pt", "it", "zh", "ja"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Startup Idea Ranking & Scoring (1–10)",
+        "AI Market Size Analysis (TAM / SAM / SOM)",
+        "SWOT Analysis",
+        "Competitive Landscape Mapping",
+        "Idea Improvement & Pivot Suggestions",
+        "Problem Validation",
+        "Monetization Strategy",
+        "Multi-language Support (8 languages)"
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "IdeaRank",
+        "url": "https://idearank.app"
+      }
+    }
+    </script>
+
+    <!-- Google Search Console — add verification code after connecting -->
+    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE"> -->
+
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
-    <div class="landing-container">
-        <div class="landing-header">
-            <img src="logo.png" alt="IdeaRank Logo" class="logo-img">
-            <h1>IdeaRank</h1>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn" id="languageBtn">
+            <span class="material-symbols-outlined">language</span>
+            <span id="currentLang">EN</span>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="en">English</div>
+            <div class="language-option" data-lang="es">Español</div>
+            <div class="language-option" data-lang="fr">Français</div>
+            <div class="language-option" data-lang="de">Deutsch</div>
+            <div class="language-option" data-lang="pt">Português</div>
+            <div class="language-option" data-lang="it">Italiano</div>
+            <div class="language-option" data-lang="zh">中文</div>
+            <div class="language-option" data-lang="ja">日本語</div>
         </div>
-        <p class="subtitle">Get expert-level, transparent analysis of your startup ideas. We use deep data and critical
-            logic to rank your potential.</p>
-
-        <div class="input-group">
-            <textarea id="ideaInput"
-                placeholder="Describe your startup idea in detail... (e.g., A vertical SaaS for local plumbing businesses to automate dispatching and billing via AI)"></textarea>
-            <button id="rankBtn" class="primary-btn">Analyze Idea</button>
-        </div>
-
-        <div class="marketing-grid">
-            <div class="m-card">
-                <div class="icon"><span class="material-symbols-outlined">dataset</span></div>
-                <h3>Real-World Data</h3>
-                <p>We analyze live market reports and competitive landscapes to give you genuine, cited insights.</p>
-            </div>
-            <div class="m-card">
-                <div class="icon"><span class="material-symbols-outlined">tactic</span></div>
-                <h3>Critical Logic</h3>
-                <p>No generic praise. Our AI is tuned to find the holes in your strategy and help you pivot.</p>
-            </div>
-            <div class="m-card">
-                <div class="icon"><span class="material-symbols-outlined">share</span></div>
-                <h3>Shareable Proof</h3>
-                <p>Generate high-quality scorecards to share with co-founders or investors instantly.</p>
-            </div>
-        </div>
-
-        <footer class="landing-footer">
-            <p>&copy; 2024 IdeaRank Analysis Engine. Transparent. Critical. Data-Driven.</p>
-        </footer>
-    </div>
     </div>
 
     <div id="loading" class="loading-overlay">
@@ -60,7 +108,46 @@
             <div class="puzzle-piece p3"></div>
             <div class="puzzle-piece p4"></div>
         </div>
-        <p class="loading-text">Assembling Deep Analysis...</p>
+        <p id="loadingText" class="loading-text" data-i18n="loading.text">Assembling Market Intelligence...</p>
+    </div>
+
+    <div class="landing-container">
+        <div class="landing-header">
+            <img src="logo.png" alt="IdeaRank Logo" class="logo-img">
+            <h1 data-i18n="landing.title">IdeaRank</h1>
+        </div>
+        <p class="subtitle" data-i18n="landing.subtitle">Get expert-level, transparent analysis of your startup ideas.
+            We use deep data and critical logic to rank your potential.</p>
+
+        <div class="input-group">
+            <textarea id="ideaInput" data-i18n-placeholder="landing.placeholder"></textarea>
+            <button id="rankBtn" class="primary-btn" data-i18n="landing.analyze">Analyze Idea</button>
+        </div>
+
+        <div class="marketing-grid">
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">dataset</span></div>
+                <h3 data-i18n="landing.features.data.title">Real-World Data</h3>
+                <p data-i18n="landing.features.data.desc">We analyze live market reports and competitive landscapes to
+                    give you genuine, cited insights.</p>
+            </div>
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">tactic</span></div>
+                <h3 data-i18n="landing.features.logic.title">Critical Logic</h3>
+                <p data-i18n="landing.features.logic.desc">No generic praise. Our AI is tuned to find the holes in your
+                    strategy and help you pivot.</p>
+            </div>
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">share</span></div>
+                <h3 data-i18n="landing.features.share.title">Shareable Proof</h3>
+                <p data-i18n="landing.features.share.desc">Generate high-quality scorecards to share with co-founders or
+                    investors instantly.</p>
+            </div>
+        </div>
+
+        <footer class="landing-footer">
+            <p data-i18n="landing.footer">&copy; 2024 IdeaRank Analysis Engine. Transparent. Critical. Data-Driven.</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>

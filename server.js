@@ -5,6 +5,7 @@ const path = require('path');
 
 const ideaRankRouter = require('./routes/ideaRank');
 const ideaImproveRouter = require('./routes/ideaImprove');
+const problemRankRouter = require('./routes/problemRank');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/api/rank', ideaRankRouter);
 app.use('/api/improve', ideaImproveRouter);
+app.use('/api/problem', problemRankRouter);
 
 // Fallback for SPA (though we are using simple HTML files)
 app.get('/dashboard', (req, res) => {
