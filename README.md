@@ -10,6 +10,8 @@
   <br>
   <a href="https://idearank.netlify.app">🌐 Live Demo</a> •
   <a href="https://github.com/tanaymishra/idearank">📦 GitHub</a>
+  <br>
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/7bc40d21-f87f-4342-904e-198849e697d5/deploy-status)](https://app.netlify.com/projects/idearank/deploys)
 </div>
 
 <br/>
