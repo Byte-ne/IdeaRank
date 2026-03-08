@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeaRank | Expert Idea Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+<body>
+    <div class="landing-container">
+        <div class="landing-header">
+            <img src="logo.png" alt="IdeaRank Logo" class="logo-img">
+            <h1>IdeaRank</h1>
+        </div>
+        <p class="subtitle">Get expert-level, transparent analysis of your startup ideas. We use deep data and critical
+            logic to rank your potential.</p>
+
+        <div class="input-group">
+            <textarea id="ideaInput"
+                placeholder="Describe your startup idea in detail... (e.g., A vertical SaaS for local plumbing businesses to automate dispatching and billing via AI)"></textarea>
+            <button id="rankBtn" class="primary-btn">Analyze Idea</button>
+        </div>
+
+        <div class="marketing-grid">
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">dataset</span></div>
+                <h3>Real-World Data</h3>
+                <p>We analyze live market reports and competitive landscapes to give you genuine, cited insights.</p>
+            </div>
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">tactic</span></div>
+                <h3>Critical Logic</h3>
+                <p>No generic praise. Our AI is tuned to find the holes in your strategy and help you pivot.</p>
+            </div>
+            <div class="m-card">
+                <div class="icon"><span class="material-symbols-outlined">share</span></div>
+                <h3>Shareable Proof</h3>
+                <p>Generate high-quality scorecards to share with co-founders or investors instantly.</p>
+            </div>
+        </div>
+
+        <footer class="landing-footer">
+            <p>&copy; 2024 IdeaRank Analysis Engine. Transparent. Critical. Data-Driven.</p>
+        </footer>
+    </div>
+    </div>
+
+    <div id="loading" class="loading-overlay">
+        <div class="puzzle-container">
+            <div class="puzzle-piece p1"></div>
+            <div class="puzzle-piece p2"></div>
+            <div class="puzzle-piece p3"></div>
+            <div class="puzzle-piece p4"></div>
+        </div>
+        <p class="loading-text">Assembling Deep Analysis...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

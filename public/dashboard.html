@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Dashboard | IdeaRank</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <a href="/" class="sidebar-header">
+                <img src="logo.png" alt="Logo" class="logo-img" style="height: 24px;">
+                <span style="font-size: 1.25rem; font-weight: 800; letter-spacing: -0.05em;">IdeaRank</span>
+            </a>
+            <nav id="sidebarNav" style="display: flex; flex-direction: column; height: calc(100% - 60px);">
+                <a href="#" class="nav-item active" data-tool="ranker">
+                    <span class="material-symbols-outlined">analytics</span> Idea Ranker
+                </a>
+                <a href="#" class="nav-item" data-tool="improver">
+                    <span class="material-symbols-outlined">rocket_launch</span> Idea Improver
+                </a>
+                <a href="#" class="nav-item" data-tool="problem" style="opacity: 0.5; cursor: not-allowed;">
+                    <span class="material-symbols-outlined">help</span> Problem Ranker
+                </a>
+                <div style="margin-top: auto;">
+                    <a href="#" class="nav-item" data-tool="settings">
+                        <span class="material-symbols-outlined">settings</span> Settings
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="toolView">
+                <!-- Content will be injected by script.js -->
+            </div>
+        </main>
+    </div>
+
+    <div id="loading" class="loading-overlay">
+        <div class="puzzle-container">
+            <div class="puzzle-piece p1"></div>
+            <div class="puzzle-piece p2"></div>
+            <div class="puzzle-piece p3"></div>
+            <div class="puzzle-piece p4"></div>
+        </div>
+        <p id="loadingText" class="loading-text">Assembling Market Intelligence...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
