@@ -2,15 +2,19 @@
   <img src="public/logo.png" alt="IdeaRank Logo" width="120" />
   <h1>IdeaRank</h1>
   <p><strong>The Professional AI-Powered Startup Analysis Engine</strong></p>
-  
+  <p><em>Founded by Tanay Mishra in 2026</em></p>
+
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
   [![AI](https://img.shields.io/badge/Powered%20by-Groq%20(Llama--3)-darkviolet.svg)](https://groq.com/)
+  <br>
+  <a href="https://idearank.netlify.app">🌐 Live Demo</a> •
+  <a href="https://github.com/tanaymishra/idearank">📦 GitHub</a>
 </div>
 
 <br/>
 
-IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports.
+IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports. Founded by Tanay Mishra in 2026.
 
 ---
 
@@ -125,9 +129,51 @@ IdeaRank/
 
 ---
 
-## The AI Prompt Engine
+## 🚀 Deployment
 
-IdeaRank relies on highly structured system prompts to guarantee output shapes. The backend forces the LLM to return strict JSON arrays corresponding to the UI's Market, SWOT, and Roadmap cards. If you wish to tweak the analysis style (e.g., make it harsher, focus more on B2B SaaS, or change the scoring algorithm), modify the templates inside `services/aiService.js`.
+### Netlify (Recommended)
+IdeaRank is optimized for Netlify deployment with serverless functions.
+
+1. **Connect to Netlify:**
+   - Import your GitHub repository to Netlify
+   - Build settings: `npm run build`, publish `public/`, functions `netlify/functions/`
+
+2. **Environment Variables:**
+   ```
+   GROQ_API_KEY = your_groq_api_key
+   GROQ_API_KEY_BACKUP = your_backup_key (optional)
+   NODE_VERSION = 18
+   ```
+
+3. **Custom Domain:**
+   - Set up `idearank.netlify.app` or your custom domain
+
+See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for detailed instructions.
+
+### Local Development
+```bash
+npm install
+npm start
+# Server runs on http://localhost:3000
+```
+
+---
+
+## 📢 Marketing & Growth
+
+### Key Platforms for Growth:
+- **Product Hunt**: Launch your product (aim for top 3)
+- **Hacker News**: Share HN post for massive traffic
+- **Reddit**: Post on r/Entrepreneur, r/Startups, r/IndieHackers
+- **Twitter/X**: Build community and share insights
+- **LinkedIn**: Connect with startup founders and VCs
+
+### Content Strategy:
+- Weekly blog posts on startup validation
+- Case studies and user testimonials
+- AI tool comparisons and reviews
+
+See [MARKETING_STRATEGY.md](MARKETING_STRATEGY.md) for complete marketing playbook.
 
 ---
 

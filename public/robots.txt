@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /dashboard
 
-Sitemap: https://idearank.app/sitemap.xml
+Sitemap: https://idearank.netlify.app/sitemap.xml
