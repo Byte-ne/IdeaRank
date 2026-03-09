@@ -572,6 +572,11 @@ async function analyzeIdea(idea, type = 'rank') {
         saveToHistory(transformedAnalysis, type);
         displayAnalysis(transformedAnalysis, type);
 
+        // Track successful analysis
+        if (typeof trackIdeaAnalysis === 'function') {
+            trackIdeaAnalysis(type);
+        }
+
     } catch (error) {
         hideLoading();
         console.error('Analysis failed:', error);
@@ -641,6 +646,11 @@ async function analyzeProblem(problem) {
         hideLoading();
         saveToHistory(transformedAnalysis, 'problem');
         displayAnalysis(transformedAnalysis, 'problem');
+
+        // Track successful problem analysis
+        if (typeof trackIdeaAnalysis === 'function') {
+            trackIdeaAnalysis('problem');
+        }
 
     } catch (error) {
         hideLoading();
@@ -1272,6 +1282,11 @@ function clearHistory() {
 // Tool switching
 function switchTool(tool) {
     currentTool = tool;
+
+    // Track tool switch
+    if (typeof trackToolSwitch === 'function') {
+        trackToolSwitch(tool);
+    }
 
     // Update navigation
     document.querySelectorAll('.nav-item').forEach(item => {

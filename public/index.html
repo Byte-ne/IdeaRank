@@ -155,6 +155,31 @@
     }
     </script>
 
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+
+      // Track IdeaRank interactions
+      function trackIdeaAnalysis(type) {
+        gtag('event', 'idea_analysis', {
+          event_category: 'engagement',
+          event_label: type,
+          value: 1
+        });
+      }
+
+      function trackToolSwitch(tool) {
+        gtag('event', 'tool_switch', {
+          event_category: 'navigation',
+          event_label: tool
+        });
+      }
+    </script>
+
     <!-- Google Search Console — add verification code after connecting -->
     <meta name="google-site-verification" content="lPw8OE1ibjkRl6amMGNBOl8nolHqQqEAP4yDhojWObI" />
 
