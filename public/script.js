@@ -672,9 +672,9 @@ function displayAnalysis(analysis, type = 'rank') {
 
     // Score tier label
     const tierInfo = analysis.score >= 8.5 ? { label: 'Excellent', cls: 'tier-excellent' } :
-                     analysis.score >= 7   ? { label: 'Good',      cls: 'tier-good'      } :
-                     analysis.score >= 5   ? { label: 'Average',   cls: 'tier-average'   } :
-                                            { label: 'Needs Work', cls: 'tier-weak'      };
+        analysis.score >= 7 ? { label: 'Good', cls: 'tier-good' } :
+            analysis.score >= 5 ? { label: 'Average', cls: 'tier-average' } :
+                { label: 'Needs Work', cls: 'tier-weak' };
 
     // Competition landscape CSS class
     const rawLandscape = (analysis.competition && analysis.competition.landscape) ? analysis.competition.landscape : '';
@@ -996,12 +996,12 @@ function showProblem() {
 function renderHistoryCards(list) {
     const typeLabel = (t) =>
         t === 'rank' ? translations[currentLanguage]['history.ranked'] :
-        t === 'improve' ? translations[currentLanguage]['history.improved'] : 'Problem';
+            t === 'improve' ? translations[currentLanguage]['history.improved'] : 'Problem';
 
     return list.map(item => {
         const score = item.data.score;
         const scoreColor = score >= 8 ? 'var(--success-color)' :
-                           score >= 6 ? 'var(--warning-color)' : 'var(--danger-color)';
+            score >= 6 ? 'var(--warning-color)' : 'var(--danger-color)';
         const summary = (item.data.summary || '').substring(0, 100);
         const date = new Date(item.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
         return `
