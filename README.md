@@ -16,7 +16,11 @@
 
 <br/>
 
-IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports. Founded by Tanay Mishra in 2026.
+IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports.
+### USE THE TOOL YOURSELF
+```bash
+https://IdeaRank.netlify.app/
+```
 
 ---
 
@@ -128,54 +132,6 @@ IdeaRank/
 ├── server.js               # Node.js Express server setup
 └── package.json            # Project dependencies & scripts
 ```
-
----
-
-## 🚀 Deployment
-
-### Netlify (Recommended)
-IdeaRank is optimized for Netlify deployment with serverless functions.
-
-1. **Connect to Netlify:**
-   - Import your GitHub repository to Netlify
-   - Build settings: `npm run build`, publish `public/`, functions `netlify/functions/`
-
-2. **Environment Variables:**
-   ```
-   GROQ_API_KEY = your_groq_api_key
-   GROQ_API_KEY_BACKUP = your_backup_key (optional)
-   NODE_VERSION = 18
-   ```
-
-3. **Custom Domain:**
-   - Set up `idearank.netlify.app` or your custom domain
-
-See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for detailed instructions.
-
-### Local Development
-```bash
-npm install
-npm start
-# Server runs on http://localhost:3000
-```
-
----
-
-## 📢 Marketing & Growth
-
-### Key Platforms for Growth:
-- **Product Hunt**: Launch your product (aim for top 3)
-- **Hacker News**: Share HN post for massive traffic
-- **Reddit**: Post on r/Entrepreneur, r/Startups, r/IndieHackers
-- **Twitter/X**: Build community and share insights
-- **LinkedIn**: Connect with startup founders and VCs
-
-### Content Strategy:
-- Weekly blog posts on startup validation
-- Case studies and user testimonials
-- AI tool comparisons and reviews
-
-See [MARKETING_STRATEGY.md](MARKETING_STRATEGY.md) for complete marketing playbook.
 
 ---
 
