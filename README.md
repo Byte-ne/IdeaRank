@@ -2,7 +2,7 @@
   <img src="public/logo.png" alt="IdeaRank Logo" width="120" />
   <h1>IdeaRank</h1>
   <p><strong>The Professional AI-Powered Startup Analysis Engine</strong></p>
-  <p><em>Founded by Tanay Mishra in 2026</em></p>
+  <p><em>Founded by <a href="https://GitHub.com/Byte-ne">Tanay Mishra</a> in 2026</em></p>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
