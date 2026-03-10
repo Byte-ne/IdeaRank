@@ -8,19 +8,16 @@
   [![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
   [![AI](https://img.shields.io/badge/Powered%20by-Groq%20(Llama--3)-darkviolet.svg)](https://groq.com/)
   <br>
-  <a href="https://idearank.netlify.app">🌐 Live Demo</a> •
-  <a href="https://github.com/tanaymishra/idearank">📦 GitHub</a>
+  <a href="https://idearank.netlify.app">🌐 Visit</a> •
+  <a href="https://github.com/Byte-ne/idearank">📦 GitHub</a>
   <br>
   [![Netlify Status](https://api.netlify.com/api/v1/badges/7bc40d21-f87f-4342-904e-198849e697d5/deploy-status)](https://app.netlify.com/projects/idearank/deploys)
 </div>
 
 <br/>
 
-IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports.
-### USE THE TOOL YOURSELF
-```bash
-https://IdeaRank.netlify.app/
-```
+IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports. 
+The Platform is Not yet monetized, and is currently COMPLETELY FREE & UNLIMITED to use.
 
 ---
 
