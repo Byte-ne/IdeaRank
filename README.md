@@ -135,7 +135,29 @@ IdeaRank/
 
 ## Current architecture
 
-## Current architecture
+IdeaRank is a simple, stateless web app: the browser sends your idea to a Node/Express API, which calls Groq (Llama 3.3) and returns the analysis. No database, no sign‑in, no data stored between requests.
+
+- **Client (Web UI)**  
+  - Static HTML/CSS/JS served to the browser.  
+  - When you click “Analyze”, it sends an HTTP request (e.g. `POST /analyze`) with your idea text.
+
+- **Server (Node.js / Express)**  
+  - API routes (like `/analyze`) receive the request, read and validate the idea text.  
+  - The route calls an internal AI service that:
+    - Builds the prompt and payload.
+    - Calls the Groq API with your idea.
+    - Parses the response into a structured result (JSON/text sections).  
+  - The API then sends this result back to the browser as JSON or rendered HTML.
+
+- **AI (Groq / Llama 3.3)**  
+  - The actual model runs on Groq’s cloud.  
+  - IdeaRank never stores your ideas; it just forwards them to Groq and returns the model’s reply.
+
+- **Infra & config**  
+  - Hosted on a static+Node platform (e.g. Netlify or similar) that serves the UI and runs the Express server.  
+  - Secrets like `GROQ_API_KEY` are provided via environment variables (`.env`), not hard‑coded.
+
+Mermaid diagram of the flow:
 
 ```mermaid
 flowchart LR
