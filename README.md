@@ -12,6 +12,7 @@
   <a href="https://github.com/Byte-ne/idearank">📦 GitHub</a>
   <br>
   [![Netlify Status](https://api.netlify.com/api/v1/badges/7bc40d21-f87f-4342-904e-198849e697d5/deploy-status)](https://app.netlify.com/projects/idearank/deploys)
+  [![GitHub stars](https://img.shields.io/github/stars/Byte-ne/IdeaRank?style=social)](https://github.com/Byte-ne/IdeaRank/stargazers)
 </div>
 
 <br/>
@@ -80,7 +81,7 @@ IdeaRank is built to be lightweight, fast, and highly customizable.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/IdeaRank.git
+   git clone https://github.com/Byte-ne/IdeaRank.git
    cd IdeaRank
    ```
 
@@ -129,6 +130,33 @@ IdeaRank/
 ├── server.js               # Node.js Express server setup
 └── package.json            # Project dependencies & scripts
 ```
+
+---
+
+## Current architecture
+
+```mermaid
+flowchart LR
+  A[Web UI] --> B[API (Node/Express)]
+  B --> C[Groq + Llama 3.3]
+  B --> D[Database]
+```
+
+---
+
+## Use cases
+
+- Quickly validate hackathon or weekend‑project ideas.
+- Give founders a “reality check” on market, competition, and execution risk.
+- Use inside a startup studio or accelerator to triage many ideas.
+- Integrate as an internal tool for product teams exploring new bets.
+
+---
+
+## Support
+
+If IdeaRank helps you evaluate ideas or you find the code useful, please consider **starring** this repo.  
+Stars help others discover the project and motivate future improvements.
 
 ---
 
