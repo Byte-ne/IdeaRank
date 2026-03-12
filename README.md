@@ -139,9 +139,33 @@ IdeaRank/
 
 ```mermaid
 flowchart LR
-  A["Web UI"] --> B["API (Node/Express)"]
-  B --> C["Groq + Llama 3.3"]
-  B --> D["Database"]
+  subgraph Client
+    UI["Web UI (static HTML/CSS/JS)"]
+  end
+
+  subgraph Server["Node.js / Express"]
+    API["HTTP Routes (e.g. /analyze)"]
+    SVC["AI Service (calls Groq API)"]
+  end
+
+  subgraph AI["Groq Cloud"]
+    LLM["Llama 3.3 70B Versatile"]
+  end
+
+  subgraph Infra["Deployment & Config"]
+    HOST["Netlify / Hosting (static + Node)"]
+    ENV["Environment (.env with GROQ_API_KEY, etc.)"]
+  end
+
+  UI -->|"User submits idea text"| API
+  API -->|"Forward prompt & params"| SVC
+  SVC -->|"Request with idea text"| LLM
+  LLM -->|"Analysis response"| SVC
+  SVC -->|"Formatted result (JSON/HTML)"| API
+  API -->|"Send analysis back"| UI
+
+  HOST -->|"Serves UI + runs server"| Server
+  ENV -->|"Provides secrets at runtime"| Server
 ```
 
 ---
