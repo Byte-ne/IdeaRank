@@ -135,12 +135,13 @@ IdeaRank/
 
 ## Current architecture
 
+## Current architecture
+
 ```mermaid
 flowchart LR
   A[Web UI] --> B[API (Node/Express)]
   B --> C[Groq + Llama 3.3]
   B --> D[Database]
-```
 
 ---
 
