@@ -2,21 +2,23 @@
   <img src="public/logo.png" alt="IdeaRank Logo" width="120" />
   <h1>IdeaRank</h1>
   <p><strong>The Professional AI-Powered Startup Analysis Engine</strong></p>
-  <p><em>Founded by Tanay Mishra in 2026</em></p>
+  <p><em>Founded by <a href="https://GitHub.com/Byte-ne">Tanay Mishra</a> in 2026</em></p>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
   [![AI](https://img.shields.io/badge/Powered%20by-Groq%20(Llama--3)-darkviolet.svg)](https://groq.com/)
   <br>
-  <a href="https://idearank.netlify.app">🌐 Live Demo</a> •
-  <a href="https://github.com/tanaymishra/idearank">📦 GitHub</a>
+  <a href="https://idearank.netlify.app">🌐 Visit</a> •
+  <a href="https://github.com/Byte-ne/idearank">📦 GitHub</a>
   <br>
   [![Netlify Status](https://api.netlify.com/api/v1/badges/7bc40d21-f87f-4342-904e-198849e697d5/deploy-status)](https://app.netlify.com/projects/idearank/deploys)
+  [![GitHub stars](https://img.shields.io/github/stars/Byte-ne/IdeaRank?style=social)](https://github.com/Byte-ne/IdeaRank/stargazers)
 </div>
 
 <br/>
 
-IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports. Founded by Tanay Mishra in 2026.
+IdeaRank is a lightning-fast web application designed to help founders, product managers, and advisors evaluate startup ideas and problems using structured, deep AI analysis. It turns simple 1-sentence ideas into comprehensive business reports. 
+The Platform is Not yet monetized, and is currently COMPLETELY FREE & UNLIMITED to use.
 
 ---
 
@@ -79,7 +81,7 @@ IdeaRank is built to be lightweight, fast, and highly customizable.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/IdeaRank.git
+   git clone https://github.com/Byte-ne/IdeaRank.git
    cd IdeaRank
    ```
 
@@ -131,51 +133,86 @@ IdeaRank/
 
 ---
 
+<<<<<<< HEAD
 ## Deployment
+=======
+## Current architecture
+>>>>>>> 07754c324e54ccbd456eda2f51b299063a8466cf
 
-### Netlify (Recommended)
-IdeaRank is optimized for Netlify deployment with serverless functions.
+IdeaRank is a simple, stateless web app: the browser sends your idea to a Node/Express API, which calls Groq (Llama 3.3) and returns the analysis. No database, no sign‑in, no data stored between requests.
 
-1. **Connect to Netlify:**
-   - Import your GitHub repository to Netlify
-   - Build settings: `npm run build`, publish `public/`, functions `netlify/functions/`
+- **Client (Web UI)**  
+  - Static HTML/CSS/JS served to the browser.  
+  - When you click “Analyze”, it sends an HTTP request (e.g. `POST /analyze`) with your idea text.
 
-2. **Environment Variables:**
-   ```
-   GROQ_API_KEY = your_groq_api_key
-   GROQ_API_KEY_BACKUP = your_backup_key (optional)
-   NODE_VERSION = 18
-   ```
+- **Server (Node.js / Express)**  
+  - API routes (like `/analyze`) receive the request, read and validate the idea text.  
+  - The route calls an internal AI service that:
+    - Builds the prompt and payload.
+    - Calls the Groq API with your idea.
+    - Parses the response into a structured result (JSON/text sections).  
+  - The API then sends this result back to the browser as JSON or rendered HTML.
 
-3. **Custom Domain:**
-   - Set up `idearank.netlify.app` or your custom domain
+- **AI (Groq / Llama 3.3)**  
+  - The actual model runs on Groq’s cloud.  
+  - IdeaRank never stores your ideas; it just forwards them to Groq and returns the model’s reply.
 
-See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for detailed instructions.
+- **Infra & config**  
+  - Hosted on a static+Node platform (e.g. Netlify or similar) that serves the UI and runs the Express server.  
+  - Secrets like `GROQ_API_KEY` are provided via environment variables (`.env`), not hard‑coded.
 
-### Local Development
-```bash
-npm install
-npm start
-# Server runs on http://localhost:3000
+Mermaid diagram of the flow:
+
+```mermaid
+flowchart LR
+  subgraph Client
+    UI["Web UI (static HTML/CSS/JS)"]
+  end
+
+  subgraph Server["Node.js / Express"]
+    API["HTTP Routes (e.g. /analyze)"]
+    SVC["AI Service (calls Groq API)"]
+  end
+
+  subgraph AI["Groq Cloud"]
+    LLM["Llama 3.3 70B Versatile"]
+  end
+
+  subgraph Infra["Deployment & Config"]
+    HOST["Netlify / Hosting (static + Node)"]
+    ENV["Environment (.env with GROQ_API_KEY, etc.)"]
+  end
+
+  UI -->|"User submits idea text"| API
+  API -->|"Forward prompt & params"| SVC
+  SVC -->|"Request with idea text"| LLM
+  LLM -->|"Analysis response"| SVC
+  SVC -->|"Formatted result (JSON/HTML)"| API
+  API -->|"Send analysis back"| UI
+
+  HOST -->|"Serves UI + runs server"| Server
+  ENV -->|"Provides secrets at runtime"| Server
 ```
 
 ---
 
+<<<<<<< HEAD
 ## Marketing & Growth
+=======
+## Use cases
+>>>>>>> 07754c324e54ccbd456eda2f51b299063a8466cf
 
-### Key Platforms for Growth:
-- **Product Hunt**: Launch your product (aim for top 3)
-- **Hacker News**: Share HN post for massive traffic
-- **Reddit**: Post on r/Entrepreneur, r/Startups, r/IndieHackers
-- **Twitter/X**: Build community and share insights
-- **LinkedIn**: Connect with startup founders and VCs
+- Quickly validate hackathon or weekend‑project ideas.
+- Give founders a “reality check” on market, competition, and execution risk.
+- Use inside a startup studio or accelerator to triage many ideas.
+- Integrate as an internal tool for product teams exploring new bets.
 
-### Content Strategy:
-- Weekly blog posts on startup validation
-- Case studies and user testimonials
-- AI tool comparisons and reviews
+---
 
-See [MARKETING_STRATEGY.md](MARKETING_STRATEGY.md) for complete marketing playbook.
+## Support
+
+If IdeaRank helps you evaluate ideas or you find the code useful, please consider **starring** this repo.  
+Stars help others discover the project and motivate future improvements.
 
 ---
 
