@@ -220,43 +220,204 @@
     <p id="loadingText" class="loading-text" data-i18n="loading.text">Assembling Market Intelligence...</p>
   </div>
 
-  <div class="landing-container">
-    <div class="landing-header">
-      <img src="logo.png" alt="IdeaRank Logo" class="logo-img">
-      <h1 data-i18n="landing.title">IdeaRank</h1>
-    </div>
-    <p class="subtitle" data-i18n="landing.subtitle">Get expert-level, transparent analysis of your startup ideas.
-      We use deep data and critical logic to rank your potential.</p>
-
-    <div class="input-group">
-      <textarea id="ideaInput" data-i18n-placeholder="landing.placeholder"></textarea>
-      <button id="rankBtn" class="primary-btn" data-i18n="landing.analyze">Analyze Idea</button>
+  <div class="landing-v2">
+    <div class="landing-bg" aria-hidden="true">
+      <div class="landing-grid"></div>
+      <div class="landing-glow landing-glow-a"></div>
+      <div class="landing-glow landing-glow-b"></div>
+      <div class="landing-noise"></div>
     </div>
 
-    <div class="marketing-grid">
-      <div class="m-card">
-        <div class="icon"><span class="material-symbols-outlined">dataset</span></div>
-        <h3 data-i18n="landing.features.data.title">Real-World Data</h3>
-        <p data-i18n="landing.features.data.desc">We analyze live market reports and competitive landscapes to
-          give you genuine, cited insights.</p>
-      </div>
-      <div class="m-card">
-        <div class="icon"><span class="material-symbols-outlined">tactic</span></div>
-        <h3 data-i18n="landing.features.logic.title">Critical Logic</h3>
-        <p data-i18n="landing.features.logic.desc">No generic praise. Our AI is tuned to find the holes in your
-          strategy and help you pivot.</p>
-      </div>
-      <div class="m-card">
-        <div class="icon"><span class="material-symbols-outlined">share</span></div>
-        <h3 data-i18n="landing.features.share.title">Shareable Proof</h3>
-        <p data-i18n="landing.features.share.desc">Generate high-quality scorecards to share with co-founders or
-          investors instantly.</p>
-      </div>
-    </div>
+    <header class="landing-topbar reveal">
+      <a class="brand" href="/" aria-label="IdeaRank home">
+        <img src="logo.png" alt="" class="logo-img">
+        <span class="brand-name" data-i18n="landing.title">IdeaRank</span>
+        <span class="brand-badge">Beta</span>
+      </a>
 
-    <footer class="landing-footer">
-      <p data-i18n="landing.footer">&copy; 2026 IdeaRank Analysis Engine. Transparent. Critical. Data-Driven.</p>
-    </footer>
+      <nav class="landing-nav" aria-label="Primary">
+        <a class="nav-link" href="#how">How it works</a>
+        <a class="nav-link" href="#tools">Tools</a>
+        <a class="nav-link" href="/docs" data-doc="getting-started/overview">Docs</a>
+      </nav>
+
+      <div class="landing-actions">
+        <a class="ghost-btn" href="dashboard.html">Open Dashboard</a>
+        <button class="primary-btn compact" id="topAnalyzeBtn" type="button">
+          Analyze
+        </button>
+      </div>
+    </header>
+
+    <main class="landing-container">
+      <section class="hero">
+        <div class="hero-copy reveal">
+          <p class="hero-kicker">Market intelligence, condensed.</p>
+          <h1 class="hero-title">
+            Make your startup idea
+            <span class="hero-title-accent">obviously good</span>
+            or obviously not.
+          </h1>
+          <p class="subtitle" data-i18n="landing.subtitle">
+            Get expert-level, transparent analysis of your startup ideas. We use deep data and critical logic to rank
+            your potential.
+          </p>
+
+          <div class="hero-cta">
+            <a class="secondary-btn hero-secondary" href="dashboard.html">
+              <span class="material-symbols-outlined">dashboard</span>
+              Explore the workspace
+            </a>
+            <a class="link-btn" href="#tools">
+              See what you get
+              <span class="material-symbols-outlined">arrow_downward</span>
+            </a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill">
+              <span class="material-symbols-outlined">bolt</span>
+              Fast
+            </div>
+            <div class="trust-pill">
+              <span class="material-symbols-outlined">visibility</span>
+              Transparent
+            </div>
+            <div class="trust-pill">
+              <span class="material-symbols-outlined">security</span>
+              Private by default
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-workspace reveal">
+          <div class="workspace-shell">
+            <div class="shell-top">
+              <div class="shell-dots" aria-hidden="true">
+                <span class="dot d1"></span>
+                <span class="dot d2"></span>
+                <span class="dot d3"></span>
+              </div>
+              <div class="shell-title">IdeaRank · Analysis Workspace</div>
+              <div class="shell-meta">Ctrl + Enter to run</div>
+            </div>
+
+            <div class="shell-body">
+              <div class="workspace-left">
+                <div class="workspace-label">Input</div>
+                <div class="input-group input-group-tech">
+                  <textarea id="ideaInput" data-i18n-placeholder="landing.placeholder"></textarea>
+                  <button id="rankBtn" class="primary-btn" data-i18n="landing.analyze">Analyze Idea</button>
+                  <p class="hint">
+                    Tip: use <kbd>Ctrl</kbd> + <kbd>Enter</kbd>
+                  </p>
+                </div>
+              </div>
+              <div class="workspace-right" aria-hidden="true">
+                <div class="workspace-label">Live output</div>
+                <div class="console">
+                  <div class="console-line"><span class="c-dim">[engine]</span> Initializing…</div>
+                  <div class="console-line"><span class="c-dim">[signal]</span> Market demand model loaded</div>
+                  <div class="console-line"><span class="c-dim">[signal]</span> Competitive scan ready</div>
+                  <div class="console-line"><span class="c-dim">[next]</span> Paste an idea to begin</div>
+                </div>
+
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <div class="mini-title">Score</div>
+                    <div class="mini-val">/10</div>
+                  </div>
+                  <div class="mini-card">
+                    <div class="mini-title">TAM / SAM / SOM</div>
+                    <div class="mini-val">—</div>
+                  </div>
+                  <div class="mini-card">
+                    <div class="mini-title">SWOT</div>
+                    <div class="mini-val">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section">
+        <div class="section-head reveal">
+          <h2 class="section-title">A real workspace for real thinking</h2>
+          <p class="section-subtitle">
+            The tools are designed to feel “in” — not in-and-out. Drop your idea, stay in flow, iterate with intent.
+          </p>
+        </div>
+
+        <div class="tool-grid">
+          <article class="tool-card reveal">
+            <div class="tool-icon"><span class="material-symbols-outlined">analytics</span></div>
+            <h3 data-i18n="nav.ranker">Idea Ranker</h3>
+            <p>Score an idea with transparent logic, market sizing, and competitive context.</p>
+            <a class="tool-link" href="dashboard.html">Open in dashboard <span class="material-symbols-outlined">arrow_forward</span></a>
+          </article>
+
+          <article class="tool-card reveal">
+            <div class="tool-icon"><span class="material-symbols-outlined">rocket_launch</span></div>
+            <h3 data-i18n="nav.improver">Idea Improver</h3>
+            <p>Convert weak concepts into realistic pivots with execution steps.</p>
+            <a class="tool-link" href="dashboard.html">Open in dashboard <span class="material-symbols-outlined">arrow_forward</span></a>
+          </article>
+
+          <article class="tool-card reveal">
+            <div class="tool-icon"><span class="material-symbols-outlined">help</span></div>
+            <h3>Problem Ranker</h3>
+            <p>Rank the problem before the solution. Understand frequency, pain, and viability.</p>
+            <a class="tool-link" href="dashboard.html">Open in dashboard <span class="material-symbols-outlined">arrow_forward</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section id="how" class="section">
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3>Describe the idea</h3>
+              <p>Give a clear one-liner or a short paragraph. The engine performs a structured review.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3>Review the scorecard</h3>
+              <p>See the score, the reasoning, the market context, and what’s missing.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3>Iterate like a builder</h3>
+              <p>Use the improver to pivot strategically and save everything to your history.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="landing-footer">
+        <div class="footer-inner reveal">
+          <div class="footer-left">
+            <div class="footer-brand">
+              <img src="logo.png" alt="" class="logo-img">
+              <span class="footer-name">IdeaRank</span>
+            </div>
+            <p class="footer-tagline" data-i18n="landing.footer">
+              &copy; 2026 IdeaRank Analysis Engine. Transparent. Critical. Data-Driven.
+            </p>
+          </div>
+          <div class="footer-right">
+            <a class="footer-link" href="/docs" data-doc="getting-started/overview">Docs</a>
+            <a class="footer-link" href="dashboard.html">Dashboard</a>
+          </div>
+        </div>
+      </footer>
+    </main>
   </div>
 
   <script src="script.js"></script>

@@ -662,6 +662,8 @@ async function analyzeProblem(problem) {
 // Display analysis results
 function displayAnalysis(analysis, type = 'rank') {
     const toolView = document.getElementById('toolView');
+    const toolOutput = document.getElementById('toolOutput');
+    const mount = toolOutput || toolView;
 
     const isImprover = type === 'improve';
     const scoreColor = analysis.score >= 8 ? 'var(--success-color)' :
@@ -680,7 +682,7 @@ function displayAnalysis(analysis, type = 'rank') {
     const rawLandscape = (analysis.competition && analysis.competition.landscape) ? analysis.competition.landscape : '';
     const landscapeCls = rawLandscape.toLowerCase().replace(/\s+/g, '-');
 
-    toolView.innerHTML = `
+    mount.innerHTML = `
         <div class="score-container">
             <div class="circular-score">
                 <svg width="120" height="120">
@@ -948,49 +950,184 @@ function downloadScorecard() {
 function showRanker() {
     const toolView = document.getElementById('toolView');
     toolView.innerHTML = `
-        <div style="max-width: 600px; margin: 0 auto;">
-            <h2 data-i18n="ranker.title">Idea Ranker</h2>
-            <p data-i18n="ranker.subtitle" style="color: var(--secondary-text); margin-bottom: 2rem;">Enter a new idea for deep analysis.</p>
-            
-            <div class="input-group">
-                <textarea id="rankerInput" data-i18n-placeholder="ranker.placeholder" placeholder="Describe the idea..."></textarea>
-                <button class="primary-btn" onclick="analyzeIdea(document.getElementById('rankerInput').value, 'rank')" data-i18n="ranker.analyze">Analyze Idea</button>
+        <div class="tool-shell">
+            <div class="tool-shell-head">
+                <div class="tool-shell-title">
+                    <h2 data-i18n="ranker.title">Idea Ranker</h2>
+                    <p class="tool-subtitle" data-i18n="ranker.subtitle">Enter a new idea for deep analysis.</p>
+                </div>
+                <div class="tool-shell-hints">
+                    <div class="hint-pill"><span class="material-symbols-outlined">keyboard</span> Ctrl + Enter</div>
+                    <div class="hint-pill"><span class="material-symbols-outlined">bolt</span> Fast</div>
+                </div>
+            </div>
+
+            <div class="tool-shell-body">
+                <section class="tool-pane tool-pane-input">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Input</span>
+                        <span class="pane-meta">Describe the idea, then run analysis</span>
+                    </div>
+                    <div class="pane-body">
+                        <div class="input-group input-group-tech">
+                            <textarea id="rankerInput" data-i18n-placeholder="ranker.placeholder" placeholder="Describe your idea..."></textarea>
+                            <button class="primary-btn" onclick="analyzeIdea(document.getElementById('rankerInput').value, 'rank')" data-i18n="ranker.analyze">Analyze Idea</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tool-pane tool-pane-output">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Output</span>
+                        <span class="pane-meta">Scorecard appears here</span>
+                    </div>
+                    <div class="pane-body pane-body-scroll">
+                        <div id="toolOutput" class="tool-output-empty">
+                            <div class="empty-output">
+                                <span class="material-symbols-outlined">analytics</span>
+                                <h3>Ready when you are</h3>
+                                <p>Run an analysis to generate a scorecard with market sizing, competition, and SWOT.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     `;
     translatePage();
+
+    // Ctrl+Enter to run
+    const input = document.getElementById('rankerInput');
+    if (input) {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                analyzeIdea(input.value, 'rank');
+            }
+        });
+        input.focus();
+    }
 }
 
 function showImprover() {
     const toolView = document.getElementById('toolView');
     toolView.innerHTML = `
-        <div style="max-width: 600px; margin: 0 auto;">
-            <h2 data-i18n="improver.title">Idea Improver</h2>
-            <p data-i18n="improver.subtitle" style="color: var(--secondary-text); margin-bottom: 2rem;">Transform a weak concept into a market-ready idea.</p>
-            
-            <div class="input-group">
-                <textarea id="improverInput" data-i18n-placeholder="improver.placeholder" placeholder="Enter a weak idea..."></textarea>
-                <button class="primary-btn" onclick="analyzeIdea(document.getElementById('improverInput').value, 'improve')" data-i18n="improver.optimize">Optimize Idea</button>
+        <div class="tool-shell">
+            <div class="tool-shell-head">
+                <div class="tool-shell-title">
+                    <h2 data-i18n="improver.title">Idea Improver</h2>
+                    <p class="tool-subtitle" data-i18n="improver.subtitle">Transform a weak concept into a market-ready idea.</p>
+                </div>
+                <div class="tool-shell-hints">
+                    <div class="hint-pill"><span class="material-symbols-outlined">rocket_launch</span> Pivot mode</div>
+                    <div class="hint-pill"><span class="material-symbols-outlined">keyboard</span> Ctrl + Enter</div>
+                </div>
+            </div>
+
+            <div class="tool-shell-body">
+                <section class="tool-pane tool-pane-input">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Input</span>
+                        <span class="pane-meta">Give a weak idea — we’ll strengthen it</span>
+                    </div>
+                    <div class="pane-body">
+                        <div class="input-group input-group-tech">
+                            <textarea id="improverInput" data-i18n-placeholder="improver.placeholder" placeholder="Enter a weak idea..."></textarea>
+                            <button class="primary-btn" onclick="analyzeIdea(document.getElementById('improverInput').value, 'improve')" data-i18n="improver.optimize">Optimize Idea</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tool-pane tool-pane-output">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Output</span>
+                        <span class="pane-meta">Improvement report appears here</span>
+                    </div>
+                    <div class="pane-body pane-body-scroll">
+                        <div id="toolOutput" class="tool-output-empty">
+                            <div class="empty-output">
+                                <span class="material-symbols-outlined">rocket_launch</span>
+                                <h3>Ship the better version</h3>
+                                <p>Generate a pivot strategy, market-fit rationale, and next-step roadmap.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     `;
     translatePage();
+
+    // Ctrl+Enter to run
+    const input = document.getElementById('improverInput');
+    if (input) {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                analyzeIdea(input.value, 'improve');
+            }
+        });
+        input.focus();
+    }
 }
 
 function showProblem() {
     const toolView = document.getElementById('toolView');
     toolView.innerHTML = `
-        <div style="max-width: 600px; margin: 0 auto;">
-            <h2>Problem Ranker</h2>
-            <p style="color: var(--secondary-text); margin-bottom: 2rem;">Analyze and rank problems to understand their market potential and solution viability.</p>
-            
-            <div class="input-group">
-                <textarea id="problemInput" placeholder="Describe the problem you want to solve..."></textarea>
-                <button class="primary-btn" onclick="analyzeProblem(document.getElementById('problemInput').value)">Analyze Problem</button>
+        <div class="tool-shell">
+            <div class="tool-shell-head">
+                <div class="tool-shell-title">
+                    <h2>Problem Ranker</h2>
+                    <p class="tool-subtitle">Analyze and rank problems to understand their market potential and solution viability.</p>
+                </div>
+                <div class="tool-shell-hints">
+                    <div class="hint-pill"><span class="material-symbols-outlined">search</span> Validate first</div>
+                    <div class="hint-pill"><span class="material-symbols-outlined">keyboard</span> Ctrl + Enter</div>
+                </div>
+            </div>
+
+            <div class="tool-shell-body">
+                <section class="tool-pane tool-pane-input">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Input</span>
+                        <span class="pane-meta">Describe the problem in plain language</span>
+                    </div>
+                    <div class="pane-body">
+                        <div class="input-group input-group-tech">
+                            <textarea id="problemInput" placeholder="Describe the problem you want to solve..."></textarea>
+                            <button class="primary-btn" onclick="analyzeProblem(document.getElementById('problemInput').value)">Analyze Problem</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tool-pane tool-pane-output">
+                    <div class="pane-head">
+                        <span class="pane-kicker">Output</span>
+                        <span class="pane-meta">Problem scorecard appears here</span>
+                    </div>
+                    <div class="pane-body pane-body-scroll">
+                        <div id="toolOutput" class="tool-output-empty">
+                            <div class="empty-output">
+                                <span class="material-symbols-outlined">help</span>
+                                <h3>Start with the pain</h3>
+                                <p>Rank the problem before building the solution — frequency, impact, and viability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     `;
     translatePage();
+
+    // Ctrl+Enter to run
+    const input = document.getElementById('problemInput');
+    if (input) {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                analyzeProblem(input.value);
+            }
+        });
+        input.focus();
+    }
 }
 
 function renderHistoryCards(list) {
@@ -1376,6 +1513,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Landing page functionality
         const rankBtn = document.getElementById('rankBtn');
         const ideaInput = document.getElementById('ideaInput');
+        const topAnalyzeBtn = document.getElementById('topAnalyzeBtn');
 
         if (rankBtn && ideaInput) {
             rankBtn.addEventListener('click', () => {
@@ -1393,6 +1531,41 @@ document.addEventListener('DOMContentLoaded', function () {
                     rankBtn.click();
                 }
             });
+        }
+
+        // Topbar "Analyze" button just focuses input or runs if present
+        if (topAnalyzeBtn) {
+            topAnalyzeBtn.addEventListener('click', () => {
+                if (ideaInput) {
+                    const idea = ideaInput.value.trim();
+                    if (idea && rankBtn) {
+                        rankBtn.click();
+                        return;
+                    }
+                    ideaInput.focus();
+                }
+                // smooth scroll to workspace area
+                const shell = document.querySelector('.workspace-shell');
+                if (shell && shell.scrollIntoView) {
+                    shell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+
+        // Scroll reveal animations (landing only)
+        const revealEls = Array.from(document.querySelectorAll('.reveal'));
+        if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, threshold: 0.12 });
+            revealEls.forEach((el) => io.observe(el));
+        } else {
+            revealEls.forEach((el) => el.classList.add('in'));
         }
 
         // Language selector functionality
@@ -1428,10 +1601,29 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pendingIdea && document.querySelector('.dashboard-container')) {
         localStorage.removeItem('pendingIdea');
         setTimeout(() => {
+            // Ensure ranker UI is present so results mount into output pane
+            if (currentTool !== 'ranker') {
+                switchTool('ranker');
+            }
             analyzeIdea(pendingIdea, 'rank');
         }, 500);
     }
 
     // Initial translation
     translatePage();
+
+    // Docs deep links ("Learn More") support:
+    // Any element with `data-doc="some/slug/path"` will navigate to `/docs/some/slug/path`.
+    // Works for links/buttons anywhere without requiring per-page JS changes.
+    document.addEventListener('click', (e) => {
+        const target = e.target && e.target.closest ? e.target.closest('[data-doc]') : null;
+        if (!target) return;
+        const slugPath = (target.getAttribute('data-doc') || '').trim().replace(/^\/+|\/+$/g, '');
+        if (!slugPath) return;
+        // Prefer normal link navigation if already pointing to docs
+        const href = target.getAttribute('href');
+        if (href && href.startsWith('/docs')) return;
+        e.preventDefault();
+        window.location.href = `/docs/${encodeURI(slugPath)}`;
+    }, { capture: true });
 });

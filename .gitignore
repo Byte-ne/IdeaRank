@@ -72,3 +72,7 @@ Thumbs.db
 # Test cache files (if any)
 public/ideaRank.json
 public/ideaImprove.json
+
+# docs not yet completed
+public/docs/
+public/_redirects/

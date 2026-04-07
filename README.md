@@ -57,7 +57,7 @@ IdeaRank is a lightning-fast web application designed to help founders, product 
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
 IdeaRank is built to be lightweight, fast, and highly customizable.
 
@@ -131,7 +131,7 @@ IdeaRank/
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Netlify (Recommended)
 IdeaRank is optimized for Netlify deployment with serverless functions.
@@ -161,7 +161,7 @@ npm start
 
 ---
 
-## 📢 Marketing & Growth
+## Marketing & Growth
 
 ### Key Platforms for Growth:
 - **Product Hunt**: Launch your product (aim for top 3)

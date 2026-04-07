@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs | IdeaRank</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/docs/docs.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Code highlighting theme (docs-scoped) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github-dark.min.css" />
+</head>
+
+<body class="docs-page">
+  <div class="docs-root" id="docsRoot">
+    <div id="docsCmdkBackdrop" class="docs-cmdkBackdrop" hidden></div>
+    <header class="docs-topbar" role="banner">
+      <a class="docs-brand" href="/" aria-label="Back to IdeaRank home">
+        <img src="/logo.png" alt="IdeaRank logo" class="docs-logo" />
+        <div class="docs-brandText">
+          <div class="docs-productName">IdeaRank</div>
+          <div class="docs-productLabel">DOCS</div>
+        </div>
+      </a>
+
+      <div class="docs-searchWrap" role="search">
+        <span class="material-symbols-outlined docs-searchIcon" aria-hidden="true">search</span>
+        <input id="docsSearch" class="docs-searchInput" type="search" placeholder="Search docs…" autocomplete="off"
+          spellcheck="false" />
+        <div id="docsSearchResults" class="docs-searchResults" hidden></div>
+      </div>
+
+      <div class="docs-topbarRight">
+        <a class="docs-topbarLink" href="/dashboard" title="Open dashboard">
+          <span class="material-symbols-outlined" aria-hidden="true">dashboard</span>
+          <span class="docs-topbarLinkText">Dashboard</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="docs-body">
+      <aside class="docs-sidebar" aria-label="Documentation navigation">
+        <div class="docs-sidebarHeader">
+          <div class="docs-sidebarTitle">Documentation</div>
+          <div id="docsSidebarMeta" class="docs-sidebarMeta" aria-live="polite"></div>
+        </div>
+        <nav id="docsNav" class="docs-navTree"></nav>
+      </aside>
+
+      <main class="docs-content" id="docsContent" role="main" tabindex="-1">
+        <div class="docs-contentInner">
+          <div id="docsContentHeader" class="docs-contentHeader"></div>
+          <article id="docsArticle" class="docs-article"></article>
+          <div id="docsContentFooter" class="docs-contentFooter"></div>
+        </div>
+      </main>
+
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="docs-tocHeader">
+          <div class="docs-tocTitle">On this page</div>
+        </div>
+        <nav id="docsToc" class="docs-tocNav"></nav>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Vendor libs (no build step) -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+
+  <script src="/docs/docs.js"></script>
+</body>
+
+</html>

@@ -13,6 +13,15 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Docs (path-based deep links)
+// Important: this must run BEFORE express.static, but must not block asset requests under /docs.
+app.get(/^\/docs(?:\/.*)?$/, (req, res, next) => {
+    // If the URL looks like a file request (has an extension), let static middleware handle it.
+    if (path.extname(req.path)) return next();
+    res.sendFile(path.join(__dirname, 'public', 'docs.html'));
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
@@ -20,7 +29,7 @@ app.use('/api/rank', ideaRankRouter);
 app.use('/api/improve', ideaImproveRouter);
 app.use('/api/problem', problemRankRouter);
 
-// Fallback for SPA (though we are using simple HTML files)
+// Static HTML routes
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
