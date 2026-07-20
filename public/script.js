@@ -406,15 +406,21 @@ function applyTheme(theme, shouldSave = false) {
     // Remove all theme classes
     document.body.classList.remove('theme-dark', 'theme-light', 'theme-auto');
 
-    // Apply the selected theme
+    // Resolve auto theme to a concrete value for data-theme (CSS variables key on it)
+    let resolved = theme;
+    if (theme === 'auto') {
+        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Apply the selected theme class + data attribute (CSS variables use [data-theme="dark"])
     if (theme === 'dark') {
         document.body.classList.add('theme-dark');
     } else if (theme === 'light') {
         document.body.classList.add('theme-light');
     } else {
-        // Auto theme
         document.body.classList.add('theme-auto');
     }
+    document.documentElement.setAttribute('data-theme', resolved);
 
     // Update settings if requested
     if (shouldSave) {
@@ -692,8 +698,8 @@ function displayAnalysis(analysis, type = 'rank') {
     const strokeDashoffset = circumference - (analysis.score / 10) * circumference;
 
     // Score tier label
-    const tierInfo = analysis.score >= 8.5 ? { label: 'Excellent', cls: 'tier-excellent' } :
-        analysis.score >= 7 ? { label: 'Good', cls: 'tier-good' } :
+    const tierInfo = analysis.score >= 8.5 ? { label: 'Excellent Potential', cls: 'tier-excellent' } :
+        analysis.score >= 7 ? { label: 'Good Potential', cls: 'tier-good' } :
             analysis.score >= 5 ? { label: 'Average', cls: 'tier-average' } :
                 { label: 'Needs Work', cls: 'tier-weak' };
 
@@ -701,25 +707,56 @@ function displayAnalysis(analysis, type = 'rank') {
     const rawLandscape = (analysis.competition && analysis.competition.landscape) ? analysis.competition.landscape : '';
     const landscapeCls = rawLandscape.toLowerCase().replace(/\s+/g, '-');
 
-    mount.innerHTML = `
-        <div class="score-container">
-            <div class="circular-score">
-                <svg width="120" height="120">
-                    <circle class="bg" cx="60" cy="60" r="54"></circle>
-                    <circle class="progress" cx="60" cy="60" r="54"
-                            style="stroke: ${scoreColor}; stroke-dasharray: ${circumference}; stroke-dashoffset: ${strokeDashoffset};"></circle>
-                </svg>
-                <div class="score-text">
-                    <span class="val">${analysis.score}</span>
-                    <span class="max">/10</span>
+    // Scorecard header — mirrors the homepage preview-card
+    const scoreHeader = `
+        <div class="scorecard-card">
+            <div class="scorecard-header">
+                <div class="scorecard-dot red"></div>
+                <div class="scorecard-dot yellow"></div>
+                <div class="scorecard-dot green"></div>
+                <span class="scorecard-label">${isImprover ? 'Improved scorecard' : 'Analysis scorecard'}</span>
+            </div>
+            <div class="scorecard-score-row">
+                <div class="scorecard-score-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(37,99,235,0.12)" stroke-width="8"/>
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="${scoreColor}" stroke-width="8"
+                            stroke-dasharray="263.9" stroke-dashoffset="${263.9 - (analysis.score / 10) * 263.9}"
+                            stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                    </svg>
+                    <div class="scorecard-score-val">${analysis.score}<span>/10</span></div>
+                </div>
+                <div class="scorecard-score-meta">
+                    <div class="scorecard-score-title">${isImprover ? (translations[currentLanguage]['analysis.improved'] || 'Improved Idea') : 'Analysis Complete'}</div>
+                    <div class="scorecard-score-tier ${tierInfo.cls}">${tierInfo.label}</div>
+                    <div class="scorecard-score-conf">${analysis.confidence} confidence · ${(analysis.sources || []).length} signals</div>
                 </div>
             </div>
-            <div class="score-info">
-                <h2 class="score-title">${isImprover ? translations[currentLanguage]['analysis.improved'] : 'Analysis Complete'}</h2>
-                <p class="score-confidence-label">${analysis.confidence} ${translations[currentLanguage]['analysis.confidence']}</p>
-                <span class="score-tier-badge ${tierInfo.cls}">${tierInfo.label}</span>
+            ${!isImprover ? `
+            <div class="scorecard-metrics">
+                <div class="scorecard-metric">
+                    <span class="sm-label">TAM</span>
+                    <span class="sm-val">${analysis.marketAnalysis.tam}</span>
+                </div>
+                <div class="scorecard-metric">
+                    <span class="sm-label">SAM</span>
+                    <span class="sm-val">${analysis.marketAnalysis.sam}</span>
+                </div>
+                <div class="scorecard-metric">
+                    <span class="sm-label">SOM</span>
+                    <span class="sm-val">${analysis.marketAnalysis.som}</span>
+                </div>
+                <div class="scorecard-metric">
+                    <span class="sm-label">Demand</span>
+                    <span class="sm-val ${(analysis.demand.frequency || '').toLowerCase()}">${analysis.demand.frequency || 'Medium'}</span>
+                </div>
             </div>
+            ` : ''}
         </div>
+    `;
+
+    mount.innerHTML = `
+        ${scoreHeader}
 
         <div class="report-grid">
             <div class="card span-full">
@@ -785,24 +822,6 @@ function displayAnalysis(analysis, type = 'rank') {
                         <div class="demand-meta-row">
                             <span class="meta-label">Freq.</span>
                             <span class="meta-value">${analysis.demand.frequency}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3><span class="material-symbols-outlined">pie_chart</span> ${translations[currentLanguage]['analysis.market']}</h3>
-                    <div class="market-grid">
-                        <div class="market-item">
-                            <span>TAM</span>
-                            <strong>${analysis.marketAnalysis.tam}</strong>
-                        </div>
-                        <div class="market-item">
-                            <span>SAM</span>
-                            <strong>${analysis.marketAnalysis.sam}</strong>
-                        </div>
-                        <div class="market-item">
-                            <span>SOM</span>
-                            <strong>${analysis.marketAnalysis.som}</strong>
                         </div>
                     </div>
                 </div>
