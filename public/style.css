@@ -3506,3 +3506,261 @@ body.landing-page .reveal.in {
     text-align: right;
     flex: 1;
 }
+/* =======================================================
+   SKELETON LOADING — premium inline shimmer
+   ======================================================= */
+@keyframes skel-shimmer {
+    0% { background-position: -680px 0; }
+    100% { background-position: 680px 0; }
+}
+
+.skeleton-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.25rem;
+}
+
+.skel {
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    padding: 1.5rem;
+}
+
+.skel-line {
+    height: 14px;
+    border-radius: 7px;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(90deg, rgba(148,163,184,0.14) 0%, rgba(148,163,184,0.28) 50%, rgba(148,163,184,0.14) 100%);
+    background-size: 1360px 100%;
+    animation: skel-shimmer 1.4s infinite linear;
+}
+
+.skel-line:last-child { margin-bottom: 0; }
+.skel-line-lg { height: 26px; width: 70%; }
+.skel-line-sm { height: 12px; width: 45%; }
+.skel-line-xs { height: 12px; width: 28%; }
+
+.skel-score {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.75rem 2rem;
+}
+
+.skel-circle {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, rgba(148,163,184,0.14) 0%, rgba(148,163,184,0.28) 50%, rgba(148,163,184,0.14) 100%);
+    background-size: 220px 220px;
+    animation: skel-shimmer 1.4s infinite linear;
+}
+
+.skel-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.skel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.skel-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+}
+
+.skel-card-wide {
+    grid-column: 1 / -1;
+}
+
+.skel-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+}
+
+.skel-pills {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.skel-pill {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(148,163,184,0.14) 0%, rgba(148,163,184,0.28) 50%, rgba(148,163,184,0.14) 100%);
+    background-size: 88px 88px;
+    animation: skel-shimmer 1.4s infinite linear;
+}
+
+#toolOutput.is-loading,
+#toolView.is-loading { min-height: 320px; }
+
+/* Back button (history detail) */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+}
+
+.back-btn .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* =======================================================
+   PREMIUM POLISH & MOBILE REFINEMENTS
+   ======================================================= */
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Better focus-visible across the app */
+a:focus-visible,
+button:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Premium card hover lift with subtle gradient border glow */
+.report-grid .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.08), var(--shadow-md);
+}
+
+/* Sidebar active nav indicator */
+.nav-item.active {
+    position: relative;
+}
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 22px;
+    border-radius: 0 3px 3px 0;
+    background: var(--primary-color);
+}
+
+/* Tool pane sticky head refinement */
+.pane-head {
+    padding: 0.875rem 1.25rem;
+}
+
+/* Score number micro-interaction */
+.score-text .val {
+    transition: transform 0.3s ease;
+}
+.score-container:hover .score-text .val {
+    transform: scale(1.06);
+}
+
+/* Landing hero title responsive clamp */
+body.landing-page .hero-title {
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+}
+body.landing-page .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+/* Landing topbar mobile compact */
+@media (max-width: 768px) {
+    body.landing-page .landing-topbar {
+        padding: 0.875rem 1rem;
+    }
+    body.landing-page .brand-name { font-size: 0.95rem; }
+    body.landing-page .brand-badge { display: none; }
+    body.landing-page .ghost-btn {
+        padding: 0.6rem 0.875rem;
+        font-size: 0.85rem;
+    }
+    body.landing-page .primary-btn.compact {
+        padding: 0.7rem 0.875rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile dashboard: tighter padding, full-width tool panes */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 4.5rem 1rem 2rem;
+    }
+    .tool-shell-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    .tool-shell-hints {
+        justify-content: flex-start;
+    }
+    .tool-pane .input-group-tech {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    .tool-pane textarea {
+        min-height: 160px;
+        font-size: 1rem;
+    }
+    #toolOutput {
+        padding: 1rem 1rem 1.5rem;
+    }
+    .score-container {
+        padding: 1.5rem 1.25rem;
+        gap: 1.5rem;
+    }
+    .circular-score {
+        width: 96px;
+        height: 96px;
+    }
+    .report-grid {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .card {
+        padding: 1.25rem;
+    }
+}
+
+/* Skeleton grid collapses on mobile */
+@media (max-width: 768px) {
+    .skel-grid { grid-template-columns: 1fr; }
+    .skel-card-wide { grid-column: auto; }
+    .skel-score {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+    .skel-circle { width: 84px; height: 84px; }
+}
+
+/* Landing hero workspace hidden on small screens for clarity */
+@media (max-width: 560px) {
+    body.landing-page .hero-workspace { display: none; }
+    body.landing-page .hero { padding: 1.5rem 0 0.5rem; }
+    body.landing-page .hero-cta { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+    body.landing-page .hero-secondary { justify-content: center; }
+    body.landing-page .link-btn { justify-content: center; }
+}
+
+/* Hide the legacy puzzle animation (no longer used) */
+.puzzle-container,
+.puzzle-piece { display: none !important; }

@@ -423,14 +423,33 @@ function applyTheme(theme, shouldSave = false) {
     }
 }
 
-// Show loading function
+// Skeleton loading — renders inline into the output pane instead of a full-screen splash
 function showLoading() {
-    document.getElementById('loading').style.display = 'flex';
+    const mount = document.getElementById('toolOutput') || document.getElementById('toolView');
+    if (!mount) return;
+    mount.innerHTML = `
+        <div class="skeleton-wrap">
+            <div class="skel skel-score">
+                <div class="skel-circle"></div>
+                <div class="skel-lines">
+                    <div class="skel-line skel-line-lg"></div>
+                    <div class="skel-line skel-line-sm"></div>
+                    <div class="skel-line skel-line-xs"></div>
+                </div>
+            </div>
+            <div class="skel-grid">
+                ${'<div class="skel skel-card"><div class="skel-line skel-line-sm"></div><div class="skel-line"></div><div class="skel-line"></div><div class="skel-line skel-line-sm"></div></div>'.repeat(4)}
+                <div class="skel skel-card skel-card-wide"><div class="skel-line skel-line-sm"></div><div class="skel-line"></div><div class="skel-line"></div></div>
+            </div>
+            <div class="skel skel-bar"><div class="skel-line skel-line-sm"></div><div class="skel-pills"><div class="skel-pill"></div><div class="skel-pill"></div><div class="skel-pill"></div></div></div>
+        </div>
+    `;
+    mount.classList.add('is-loading');
 }
 
-// Hide loading function
 function hideLoading() {
-    document.getElementById('loading').style.display = 'none';
+    const mount = document.getElementById('toolOutput') || document.getElementById('toolView');
+    if (mount) mount.classList.remove('is-loading');
 }
 
 // Show toast notification
@@ -1196,9 +1215,9 @@ function showHistory() {
             <p class="tool-subtitle" data-i18n="history.subtitle">Review your past idea analyses and improvements.</p>
         </div>
         <div class="filter-row">
-            <button class="filter-pill active" onclick="filterHistory('all')" data-i18n="history.filter.all">All Analyses</button>
-            <button class="filter-pill" onclick="filterHistory('rank')" data-i18n="history.filter.rank">Idea Rankings</button>
-            <button class="filter-pill" onclick="filterHistory('improve')" data-i18n="history.filter.improve">Idea Improvements</button>
+            <button class="filter-pill active" onclick="filterHistory('all', this)" data-i18n="history.filter.all">All Analyses</button>
+            <button class="filter-pill" onclick="filterHistory('rank', this)" data-i18n="history.filter.rank">Idea Rankings</button>
+            <button class="filter-pill" onclick="filterHistory('improve', this)" data-i18n="history.filter.improve">Idea Improvements</button>
         </div>
         <div class="history-list" id="historyGrid">
             ${renderHistoryCards(analysisHistory)}
@@ -1343,10 +1362,10 @@ function showSettings() {
 }
 
 // History functions
-function filterHistory(type) {
-    const buttons = document.querySelectorAll('.filter-btn');
+function filterHistory(type, btnEl) {
+    const buttons = document.querySelectorAll('.filter-pill');
     buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    (btnEl || (event && event.target)).classList.add('active');
 
     let filteredHistory = analysisHistory;
     if (type !== 'all') {
@@ -1361,6 +1380,16 @@ function viewHistoryItem(id) {
     const item = analysisHistory.find(h => h.id === id);
     if (item) {
         displayAnalysis(item.data, item.type);
+        // Insert a back button so users can return to the history list
+        const toolView = document.getElementById('toolView');
+        if (toolView) {
+            const back = document.createElement('button');
+            back.className = 'secondary-btn back-btn';
+            back.type = 'button';
+            back.innerHTML = '<span class="material-symbols-outlined">arrow_back</span> Back to history';
+            back.addEventListener('click', () => showHistory());
+            toolView.insertBefore(back, toolView.firstChild);
+        }
     }
 }
 
@@ -1605,6 +1634,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (currentTool !== 'ranker') {
                 switchTool('ranker');
             }
+            // Pre-fill the ranker input so the user sees what's being analyzed
+            const rankerInput = document.getElementById('rankerInput');
+            if (rankerInput) rankerInput.value = pendingIdea;
             analyzeIdea(pendingIdea, 'rank');
         }, 500);
     }
