@@ -1510,6 +1510,33 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+        // Dashboard theme toggle
+        const dashThemeToggle = document.getElementById('dashboardThemeToggle');
+        const dashThemeIcon = document.getElementById('dashboardThemeIcon');
+        const dashThemeLabel = document.getElementById('dashboardThemeLabel');
+        if (dashThemeToggle) {
+            const syncDashTheme = () => {
+                const isDark = document.body.classList.contains('theme-dark') ||
+                    (document.body.classList.contains('theme-auto') &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (dashThemeIcon) dashThemeIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
+                if (dashThemeLabel) dashThemeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
+            };
+            syncDashTheme();
+            dashThemeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isDark = document.body.classList.contains('theme-dark') ||
+                    (document.body.classList.contains('theme-auto') &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next, true);
+                settings.theme = next;
+                try { localStorage.setItem('settings', JSON.stringify(settings)); } catch (e) {}
+                syncDashTheme();
+            });
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncDashTheme);
+        }
+
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.querySelector('.sidebar');
