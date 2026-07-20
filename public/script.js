@@ -1542,7 +1542,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Landing page functionality
         const rankBtn = document.getElementById('rankBtn');
         const ideaInput = document.getElementById('ideaInput');
-        const topAnalyzeBtn = document.getElementById('topAnalyzeBtn');
 
         if (rankBtn && ideaInput) {
             rankBtn.addEventListener('click', () => {
@@ -1558,25 +1557,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ideaInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && e.ctrlKey) {
                     rankBtn.click();
-                }
-            });
-        }
-
-        // Topbar "Analyze" button just focuses input or runs if present
-        if (topAnalyzeBtn) {
-            topAnalyzeBtn.addEventListener('click', () => {
-                if (ideaInput) {
-                    const idea = ideaInput.value.trim();
-                    if (idea && rankBtn) {
-                        rankBtn.click();
-                        return;
-                    }
-                    ideaInput.focus();
-                }
-                // smooth scroll to workspace area
-                const shell = document.querySelector('.workspace-shell');
-                if (shell && shell.scrollIntoView) {
-                    shell.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             });
         }
@@ -1615,13 +1595,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.stopPropagation();
             });
 
-            document.querySelectorAll('.language-option').forEach(option => {
+            document.querySelectorAll('.lang-option').forEach(option => {
                 option.addEventListener('click', () => {
                     const lang = option.getAttribute('data-lang');
                     setLanguage(lang);
                     languageDropdown.classList.remove('show');
                 });
             });
+        }
+
+        // Theme toggle (landing topbar)
+        const themeToggle = document.getElementById('landingThemeToggle');
+        const themeIcon = document.getElementById('landingThemeIcon');
+        if (themeToggle && themeIcon) {
+            const syncThemeIcon = () => {
+                const isDark = document.body.classList.contains('theme-dark') ||
+                    (document.body.classList.contains('theme-auto') &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+                themeIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
+            };
+            syncThemeIcon();
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.body.classList.contains('theme-dark') ||
+                    (document.body.classList.contains('theme-auto') &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next, true);
+                syncThemeIcon();
+            });
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeIcon);
         }
     }
 
